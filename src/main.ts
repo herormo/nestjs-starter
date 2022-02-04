@@ -1,13 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
-import * as cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { controllersExcludes } from '@tresdoce/nestjs-health';
 
 import { AppModule } from './app.module';
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, {
     logger: new Logger(),
   });
@@ -57,6 +57,6 @@ async function bootstrap() {
   await app.listen(port, () => {
     console.log(`App running on: http://localhost:${port}`);
   });
-}
+};
 
 bootstrap();
