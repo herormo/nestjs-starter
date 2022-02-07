@@ -49,3 +49,4 @@ test-report.xml
 .env
 !.env.test
 !.env.example
+.aws

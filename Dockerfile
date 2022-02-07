@@ -13,6 +13,7 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 
+#RUN npm i -g serverless --unsafe-perm
 RUN npm install
 
 COPY . .
@@ -30,10 +31,11 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 
 COPY --from=builder /usr/src/app/package*.json ./
-#COPY --from=builder /usr/src/app/.env ./
-#COPY --from=builder /usr/src/app/.env.prod ./
+#COPY --from=builder /usr/src/app/serverless.yml ./
 COPY --from=builder /usr/src/app/node_modules/ ./node_modules/
 COPY --from=builder /usr/src/app/dist ./dist
 
 EXPOSE 8080
 CMD ["node", "dist/main"]
+#CMD [ "sls", "offline", "--host", "0.0.0.0", "--httpPort", "8080" ]
+
