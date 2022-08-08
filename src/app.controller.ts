@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
@@ -18,5 +19,18 @@ export class AppController {
   @Get('my-util')
   getMyUtil() {
     return this.appService.getMyCustomUtil();
+  }
+
+  // ==================
+
+  @Get('public')
+  secretEndpoint(): string {
+    return 'this is a public endpoint';
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('protected')
+  getProtected(): string {
+    return 'this is a protected endpoint';
   }
 }

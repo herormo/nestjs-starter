@@ -7,4 +7,14 @@ dotenv.config({
   path: '.env.test',
 });
 
-module.exports = jestConfig;
+module.exports = {
+  ...jestConfig(),
+  coverageThreshold: {
+    global: {
+      branches: 0,
+      functions: 0,
+      lines: 0,
+      statements: 0,
+    },
+  },
+};

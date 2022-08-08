@@ -33,6 +33,12 @@ export default registerAs(
     params: {
       testEnv: process.env.TEST_KEY,
     },
+    auth: {
+      domain: process.env.AUTH0_DOMAIN,
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      audience: process.env.AUTH0_AUDIENCE,
+    },
     services: {
       nestJsDocs: {
         url: process.env.NEST_JS_DOCS_URL,
