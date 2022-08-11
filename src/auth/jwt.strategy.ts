@@ -28,7 +28,7 @@ export interface JwtPayload extends JsonObject {
 }
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor() {
     super({
       secretOrKeyProvider: passportJwtSecret({
@@ -48,7 +48,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: JwtPayload): Promise<JwtPayload> {
     console.log(payload);
-    const minimumScope = ['openid', 'profile', 'email'];
+    /*const minimumScope = ['openid', 'profile', 'email'];
 
     if (
       payload?.scope?.split(' ').filter((scope) => minimumScope.indexOf(scope) > -1).length !== 3
@@ -56,7 +56,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException(
         'JWT does not possess the required scope (`openid profile email`).',
       );
-    }
+    }*/
 
     return payload;
   }
