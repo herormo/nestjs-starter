@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "feat/*", "fix/*", "refactor/*", "chore/*", "docs/*", "test/*", "build/*", "perf/*", "style/*", "revert/*" ]
 
+env:
+  SONAR_EXCLUDES: src/main.ts
+  SONAR_BLACKLIST: .DS_Store
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -67,7 +71,9 @@ jobs:
         run: yarn build
 
       - name: "👨‍💻 Run Test"
-        run: yarn test
+        run: |
+          yarn sonar:properties -t app --org ${{ github.repository_owner }} -p ${{ github.event.repository.name }} -b ${GITHUB_REF#refs/heads/} --bl ${SONAR_BLACKLIST} --ex ${SONAR_EXCLUDES}
+          yarn test
         env:
           NODE_ENV: 'test'
 
@@ -78,18 +84,6 @@ jobs:
 
       - name: "📊 SonarCloud Scan"
         uses: SonarSource/sonarcloud-github-action@master
-        with:
-          args: >
-            -Dsonar.organization=${{ github.repository_owner }}
-            -Dsonar.projectKey=${{ github.repository_owner }}_${{ github.event.repository.name }}
-            -Dsonar.projectName=${{ github.repository_owner }}_${{ github.event.repository.name }}
-            -Dsonar.projectVersion=1.0
-            -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.sources=./src
-            -Dsonar.exclusions=**/*.bin,node_modules/**,test/**,**/__test__/**,**/__mocks__/**,src/main.ts
-            -Dsonar.coverage.exclusions=node_modules/**,test/**,**/__test__/**,**/__mocks__/**,src/main.ts
-            -Dsonar.testExecutionReportPaths=test-report.xml
-            -Dsonar.javascript.lcov.reportPaths=./coverage/lcov.info
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

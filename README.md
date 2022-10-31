@@ -380,7 +380,7 @@ Para poder realizar el versionado correcto en su proyecto, siga estos pasos.
 - Borrar los archivos `CHANGELOG.md` y `version.txt`
 
 ```json
-//.versionrc
+//.versionrc.js
 {
   "header": "<div align=\"center\"><h1>📝 Changelog</h1><p>All changes of this project will be documented in this file.</p></div>\n\n---\n",
   "path": "./",

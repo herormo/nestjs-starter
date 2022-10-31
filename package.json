@@ -35,7 +35,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "postinstall": "husky install",
-    "release": "standard-version"
+    "release": "standard-version",
+    "sonar:properties": "sonarProperties"
   },
   "prettier": {
     "semi": true,
@@ -86,6 +87,7 @@
     "@nestjs/testing": "^8.2.6",
     "@tresdoce-nestjs-toolkit/commons": "^0.1.2",
     "@tresdoce-nestjs-toolkit/test-utils": "^0.1.4",
+    "@tresdoce-toolkit/essentials": "^0.1.0-beta.3",
     "@types/express": "^4.17.11",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.14",

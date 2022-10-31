@@ -22,6 +22,7 @@ lerna-debug.log*
 /.nyc_output
 test-report.xml
 .scannerwork
+sonar-project.properties
 
 # IDEs and editors
 /.idea
