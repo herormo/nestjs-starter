@@ -109,7 +109,7 @@ jobs:
         run: |
           git config --global user.name "GitHub CD bot"
           git config --global user.email "${GITHUB_EMAIL}"
-          npm run release -- --release-as ${{github.event.inputs.newVersion}}        
+          npm run release -- --release-as ${{github.event.inputs.newVersion}} --packageFiles 'version.txt' --bumpFiles 'version.txt'
           git push --follow-tags origin master
 
       - name: "📄 Create Changelog"
